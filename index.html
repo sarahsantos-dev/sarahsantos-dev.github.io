@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Portfolio</title>
+<style>
+  :root{
+    --bg: #0e0e0e;
+    --bg-card: #161616;
+    --green: #4169e1;
+    --green-dark: #2f4fc0;
+    --white: #f5f5f5;
+    --muted: #b3b3b3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:25px 60px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:22px;
+    font-weight:700;
+  }
+  .logo-circle{
+    width:32px;height:32px;
+    background:var(--green);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px; font-weight:800; color:#000;
+  }
+  nav ul{
+    display:flex;
+    gap:35px;
+    list-style:none;
+  }
+  nav a{
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.5px;
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--green);}
+
+  .btn{
+    display:inline-block;
+    background:var(--green);
+    color:#000;
+    padding:12px 28px;
+    border-radius:4px;
+    font-weight:600;
+    font-size:14px;
+    transition:background .2s, transform .2s;
+  }
+  .btn:hover{background:var(--green-dark); transform:translateY(-2px);}
+
+  .hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:60px 60px 100px;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .hero-text{flex:1; min-width:280px;}
+  .hero-text h1{
+    font-size:38px;
+    font-weight:800;
+    line-height:1.2;
+  }
+  .hero-text h1 span{
+    display:block;
+    color:var(--green);
+  }
+  .hero-text p{
+    color:var(--muted);
+    margin:20px 0 30px;
+    max-width:420px;
+    font-size:15px;
+  }
+  .hero-img-wrap{
+    position:relative;
+    width:380px;
+    height:420px;
+    flex-shrink:0;
+  }
+  .circle-green{
+    position:absolute;
+    top:0; left:0;
+    width:260px; height:260px;
+    background:var(--green);
+    border-radius:50%;
+    z-index:1;
+  }
+  .circle-white{
+    position:absolute;
+    bottom:0; right:0;
+    width:220px; height:220px;
+    background:var(--white);
+    border-radius:50%;
+    z-index:1;
+  }
+  .hero-img{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:6px;
+  }
+
+  .about{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:60px;
+    padding:80px 60px;
+    flex-wrap:wrap;
+  }
+  .about-img-wrap{
+    position:relative;
+    width:280px;
+  }
+  .about-img-wrap img{
+    border-radius:6px;
+  }
+  .about-ring{
+    position:absolute;
+    bottom:-25px; left:50%;
+    transform:translateX(-50%);
+    width:230px; height:60px;
+    border:3px solid var(--green);
+    border-radius:50%;
+  }
+  .about-text{
+    max-width:520px;
+    flex:1;
+    min-width:280px;
+  }
+  .about-text h2{
+    font-size:34px;
+    font-weight:800;
+    text-transform:uppercase;
+    line-height:1.2;
+    margin-bottom:20px;
+  }
+  .about-text h2 span{color:var(--green);}
+  .about-text p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:25px;
+  }
+
+  .services{
+    text-align:center;
+    padding:60px 60px 100px;
+  }
+  .services-title h2{
+    font-size:30px;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .services-title h2 span{color:var(--green);}
+  .services-title p{color:var(--muted); margin-top:10px;}
+
+  .services-grid{
+    display:flex;
+    gap:30px;
+    justify-content:center;
+    margin-top:50px;
+    flex-wrap:wrap;
+  }
+  .service-card{
+    background:var(--bg-card);
+    border:1px solid #222;
+    border-radius:6px;
+    padding:40px 30px;
+    width:280px;
+    transition:transform .25s, border-color .25s;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--green);
+  }
+  .service-icon{
+    width:60px;height:60px;
+    background:var(--green);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 20px;
+    font-size:26px;
+  }
+  .service-card h3{
+    font-size:18px;
+    margin-bottom:15px;
+  }
+  .service-card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:25px;
+  }
+
+  .contact{
+    padding:80px 60px 100px;
+    text-align:center;
+  }
+  .contact-title h2{
+    font-size:30px;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+  .contact-title h2 span{color:var(--green);}
+  .contact-title p{color:var(--muted); margin-top:10px;}
+  .contact-email{
+    color:var(--green);
+    font-weight:600;
+    text-decoration:underline;
+  }
+  .contact-email:hover{color:var(--green-dark);}
+
+  .contact-form{
+    max-width:500px;
+    margin:40px auto 0;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    text-align:left;
+  }
+  .contact-form label{
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+    display:block;
+    color:var(--muted);
+  }
+  .contact-form input,
+  .contact-form textarea{
+    width:100%;
+    background:var(--bg-card);
+    border:1px solid #2a2a2a;
+    border-radius:4px;
+    padding:12px 14px;
+    color:var(--white);
+    font-size:14px;
+    font-family:inherit;
+    transition:border-color .2s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{
+    border-color:var(--green);
+    outline:none;
+  }
+  .contact-form textarea{resize:vertical; min-height:120px;}
+  .contact-form button{
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .form-status{
+    font-size:14px;
+    margin-top:5px;
+    min-height:20px;
+    color:var(--green);
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px;
+    border-top:1px solid #1f1f1f;
+  }
+  .footer-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--muted);
+    font-size:14px;
+    font-weight:600;
+    transition:color .2s;
+  }
+  .footer-link:hover{color:var(--green);}
+  .footer-link svg{width:20px; height:20px; fill:currentColor;}
+
+  /* RESPONSIVE */
+  @media (max-width:768px){
+    header{
+      flex-direction:column;
+      gap:15px;
+      padding:20px;
+    }
+    nav ul{gap:18px; flex-wrap:wrap; justify-content:center;}
+    .hero, .about{padding:50px 25px; text-align:center; justify-content:center;}
+    .hero-text p{margin-left:auto; margin-right:auto;}
+    .about-text{text-align:left;}
+    .services{padding:50px 25px;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--green);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="logo-circle">S</div>
+      Sarah
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">SOBRE</a></li>
+        <li><a href="#services">SERVIÇOS</a></li>
+        <li><a href="#contact">CONTATO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Eu sou
+        <span>Sarah Santos</span>
+      </h1>
+      <p>Estudante de Programação (C) e Sistemas de Informação. Aprendendo a transformar lógica em código, um exercício por vez.</p>
+      <a href="#contact" class="btn">Fale Comigo</a>
+    </div>
+    <div class="hero-img-wrap">
+      <div class="circle-green"></div>
+      <div class="circle-white"></div>
+      <img class="hero-img" src="fotoo.jpg.jpeg" alt="Foto de perfil placeholder">
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-img-wrap">
+      <img src="foto.jpg.jpeg" alt="Foto sobre mim placeholder">
+      <div class="about-ring"></div>
+    </div>
+    <div class="about-text">
+      <h2>ESTUDANTE DE <span>PROGRAMAÇÃO</span></h2>
+      <p>Estou no começo da jornada na faculdade, estudando Programação 1 em C, Sistemas de Informação, Álgebra Linear e Geometria Analítica. Gosto de entender a lógica por trás de cada exercício antes de sair escrevendo código.</p>
+      <a href="#services" class="btn">Ver Habilidades</a>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="services-title">
+      <h2>MINHAS <span>HABILIDADES</span></h2>
+      <p>Em desenvolvimento, com foco no básico bem feito</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Lógica em C</h3>
+        <p>Funções, vetores, structs e ponteiros — resolvendo exercícios passo a passo.</p>
+        <a href="#contact" class="btn">Falar Sobre Isso</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Sistemas de Informação</h3>
+        <p>ERP, CRM, BPM e processos de negócio aplicados ao mundo real.</p>
+        <a href="#contact" class="btn">Falar Sobre Isso</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Álgebra Linear</h3>
+        <p>Matrizes, determinantes e eliminação de Gauss-Jordan na prática.</p>
+        <a href="#contact" class="btn">Falar Sobre Isso</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-title">
+      <h2>FALE <span>COMIGO</span></h2>
+      <p>Tem um projeto, dúvida ou só quer trocar uma ideia? Manda mensagem.</p>
+      <p>Ou envie direto pra <a href="mailto:soliveirassnts@gmail.com" class="contact-email">soliveirassnts@gmail.com</a></p>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <div>
+        <label for="name">Nome</label>
+        <input type="text" id="name" name="name" required placeholder="Seu nome">
+      </div>
+      <div>
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+      </div>
+      <div>
+        <label for="message">Mensagem</label>
+        <textarea id="message" name="message" required placeholder="Escreva sua mensagem..."></textarea>
+      </div>
+      <button type="submit" class="btn">Enviar Mensagem</button>
+      <p class="form-status" id="formStatus"></p>
+    </form>
+  </section>
+
+  <footer>
+    <a class="footer-link" href="https://github.com/sarahsantos-dev" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Veja meus projetos no GitHub
+    </a>
+  </footer>
+
+  <script>
+
+    const API_URL = 'http://localhost:3000/api/contact';
+
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if(!name || !email || !message){
+        status.textContent = 'Preencha todos os campos.';
+        status.style.color = '#e74c3c';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      status.textContent = '';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message }),
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+          throw new Error(data.error || 'Algo deu errado.');
+        }
+
+        status.textContent = 'Mensagem enviada! Em breve eu respondo. 🙂';
+        status.style.color = 'var(--green)';
+        form.reset();
+      } catch (error) {
+        status.textContent = 'Não foi possível enviar agora. Tente de novo em um instante.';
+        status.style.color = '#e74c3c';
+        console.error('Erro ao enviar formulário:', error);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar Mensagem';
+      }
+    });
+  </script>
+
+</body>
+</html>
